@@ -23,7 +23,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: 'Run az commands'
         run: |
-          az resource list --name ODICDEMO-NonProd
+          az resource list --resource-name ODICDEMO-NonProd | ConvertFrom-Json | SELECT -property name
   deploy-prod:
     runs-on: ubuntu-latest
     environment: Prod
@@ -38,4 +38,4 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: 'Run az commands'
         run: |
-          az resource list --name ODICDEMO-Prod
+          az resource list --resource-name ODICDEMO-Prod | ConvertFrom-Json | SELECT -property name
