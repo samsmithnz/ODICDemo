@@ -38,4 +38,4 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: 'Run az commands'
         run: |
-          az resource list --name ODICDEMO-NonProd
+          az resource list --name ODICDEMO-Prod
