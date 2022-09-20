@@ -18,12 +18,12 @@ jobs:
       - name: 'Az CLI login'
         uses: azure/login@v1
         with:
-          client-id: 129b1693-12ca-4994-aaa5-16c22c52920d
-          tenant-id: 40244aae-8aee-4af5-b221-b480db24698b
-          subscription-id: 65b8d298-e5bd-4735-912e-8b9c510c4e00
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: 'Run az commands'
         run: |
-          az resource list 
+          az resource list --name ODICDEMO-NonProd
   deploy-prod:
     runs-on: ubuntu-latest
     environment: Prod
@@ -38,4 +38,4 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: 'Run az commands'
         run: |
-          az resource list 
+          az resource list --name ODICDEMO-NonProd
