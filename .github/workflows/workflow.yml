@@ -39,3 +39,6 @@ jobs:
       - name: 'Run az commands'
         run: |
           az resource list --resource-name ODICDEMO-Prod | ConvertFrom-Json | SELECT -property name
+      - name: 'Run az commands that should return nothing'
+        run: |
+          az resource list --resource-name ODICDEMO-NonProd | ConvertFrom-Json | SELECT -property name
