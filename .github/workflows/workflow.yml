@@ -5,10 +5,13 @@ permissions:
   id-token: write
   contents: read
 jobs: 
-  build-and-deploy:
+  deploy-non-prod:
     runs-on: ubuntu-latest
+    environment: NonProd
     steps:
+      - run: echo deploying to Non Prod
       - name: 'Az CLI login'
+        if: 0 == 1
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -16,6 +19,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: 'Run az commands'
+        if: 0 == 1
         run: |
           az account show
           az group list
