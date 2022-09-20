@@ -10,6 +10,16 @@ jobs:
     environment: NonProd
     steps:
       - run: echo deploying to Non Prod
+  deploy-prod:
+    runs-on: ubuntu-latest
+    environment: Prod
+    steps:
+      - run: echo deploying to Prod
+      
+      
+      
+      
+      
       - name: 'Az CLI login'
         if: 0 == 1
         uses: azure/login@v1
