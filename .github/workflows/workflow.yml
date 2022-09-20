@@ -23,8 +23,12 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: 'Run az commands'
         run: |
-          az resource list --resource-name ODICDEMO-NonProd | ConvertFrom-Json | SELECT -property name
+          az resource list --resource-group ODICDEMO-NonProd | ConvertFrom-Json | SELECT -property name
         shell: pwsh 
+      - name: 'Run az commands that should return nothing'
+        run: |
+          az resource list --resource-group ODICDEMO-Prod | ConvertFrom-Json | SELECT -property name
+        shell: pwsh
   deploy-prod:
     runs-on: ubuntu-latest
     environment: Prod
@@ -39,9 +43,9 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: 'Run az commands'
         run: |
-          az resource list --resource-name ODICDEMO-Prod | ConvertFrom-Json | SELECT -property name
+          az resource list --resource-group ODICDEMO-Prod | ConvertFrom-Json | SELECT -property name
         shell: pwsh
       - name: 'Run az commands that should return nothing'
         run: |
-          az resource list --resource-name ODICDEMO-NonProd | ConvertFrom-Json | SELECT -property name
+          az resource list --resource-group ODICDEMO-NonProd | ConvertFrom-Json | SELECT -property name
         shell: pwsh
